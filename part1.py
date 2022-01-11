@@ -13,4 +13,13 @@ for month in range(12):
         if measurement['station'] == station_code and date == months[month]: 
             monthly_total = monthly_total + measurement['value'] 
     precipitation_per_month.append(monthly_total)
-print(precipitation_per_month)
+
+seattle_data = {
+    "station": station_code,
+    "state": "WA",
+    "total_Monthly_precipitation": precipitation_per_month
+}
+
+with open('result1', 'w') as saving_part1: 
+    json.dump(seattle_data, saving_part1)
+
