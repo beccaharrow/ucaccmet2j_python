@@ -1,4 +1,7 @@
 import json
+
+#reading the .csv file and saving these values to a dictionary of dictionaries 
+#this is done so that the state/station code can be found by referring to the location first
 location_precipitation_data = {}
 with open('stations.csv', 'r') as station_data: 
     headers = station_data.readline()
@@ -11,6 +14,8 @@ with open('stations.csv', 'r') as station_data:
 with open('precipitation.json', 'r') as precipitation_json:
     precipitation_data = json.load(precipitation_json)
 
+#analysis starts here
+#this entire section of code is pretty much copy and pasted from parts 1 and 2- but it just does it with values read from the .csv file 
 months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 overall_total = 0 
 for location in location_precipitation_data: 
@@ -36,9 +41,11 @@ for location in location_precipitation_data:
     
     overall_total = overall_total + yearly_total 
 
+#this section of code divides the yearly total for the location by the overall total, to get the relative yearly total
 for location in location_precipitation_data: 
     relative_yearly_rainfall = location_precipitation_data[location]['totalYearlyPrecipitation']/overall_total
     location_precipitation_data[location]['relativeYearlyPrecipitation'] = relative_yearly_rainfall
+#analysis ends here 
 
 with open('result3.json', 'w') as saving_part3: 
     json.dump(location_precipitation_data, saving_part3)
