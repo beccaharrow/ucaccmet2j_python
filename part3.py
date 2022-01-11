@@ -20,12 +20,12 @@ for location in location_precipitation_data:
     for measurement in precipitation_data: 
         if measurement['station'] == location_precipitation_data[location]['station']: 
             yearly_total = yearly_total + measurement['value']/10
-    for month in range(12):
+    for month in months:
         monthly_total = 0  
         for measurement in precipitation_data: 
             date = measurement['date'].split('-')
             date = date[1]
-            if measurement['station'] == location_precipitation_data[location]['station'] and date == months[month]:
+            if measurement['station'] == location_precipitation_data[location]['station'] and date == month:
                 monthly_total = monthly_total + measurement['value']/10
         relative_current_month = monthly_total/yearly_total
         relative_monthly_rainfall.append(relative_current_month)
